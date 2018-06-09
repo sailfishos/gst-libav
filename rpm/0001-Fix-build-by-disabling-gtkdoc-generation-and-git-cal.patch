@@ -15,7 +15,7 @@ index ce8e26f..117edb3 100644
  SUBDIRS = $(LIBAV_SUBDIRS) $(COMMON_SUBDIRS) pkgconfig
  DIST_SUBDIRS = $(COMMON_SUBDIRS) gst-libs pkgconfig
  
-@@ -40,9 +38,6 @@
+@@ -44,9 +42,6 @@
  	$(top_builddir)/common/m4/ltversion.m4 \
  	$(top_builddir)/common/m4/lt~obsolete.m4
  
@@ -52,7 +52,7 @@ diff --git a/configure.ac b/configure.ac
 index 8a3c82d..b757e47 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -88,10 +88,6 @@
+@@ -96,10 +96,6 @@
  AC_PATH_PROG(VALGRIND_PATH, valgrind, no)
  AM_CONDITIONAL(HAVE_VALGRIND, test ! "x$VALGRIND_PATH" = "xno")
  
@@ -63,7 +63,7 @@ index 8a3c82d..b757e47 100644
  dnl *** checks for libraries ***
  
  dnl check for libm, for sin()
-@@ -493,9 +489,6 @@
+@@ -500,9 +496,6 @@
  ext/libswscale/Makefile
  gst-libs/Makefile
  gst-libs/ext/Makefile

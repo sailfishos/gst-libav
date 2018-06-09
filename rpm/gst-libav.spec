@@ -2,7 +2,7 @@
 %define gstreamer   gstreamer
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.10.4
+Version:        1.14.1
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 Group:          Libraries/Multimedia
@@ -11,17 +11,21 @@ URL:            http://gstreamer.freedesktop.org/
 Source0:        http://gstreamer.freedesktop.org/src/gst-libav/%{name}-%{version}.tar.gz
 Patch0:         0001-Fix-build-by-disabling-gtkdoc-generation-and-git-cal.patch
 
-Requires:       ffmpeg
 Requires:       gstreamer1.0
 Requires:       gstreamer1.0-plugins-base
 
-BuildRequires:  pkgconfig(gstreamer-1.0)
-BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0)
+%define sonamever %(echo %{version} | cut -d '+' -f 1)
+
+BuildRequires:  pkgconfig(gstreamer-1.0) >= %{sonamever}
+BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0) >= %{sonamever}
 BuildRequires:  orc-devel
 BuildRequires:  bzip2-devel
-BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libavfilter)
 BuildRequires:  pkgconfig(libavformat)
+BuildRequires:  pkgconfig(libavutil)
+BuildRequires:  pkgconfig(libswresample)
+BuildRequires:  pkgconfig(libswscale)
 %ifarch %{ix86} x86_64
 BuildRequires:  yasm
 %endif
@@ -57,7 +61,7 @@ plug-in.
 %patch0 -p1
 
 %build
-./autogen.sh --disable-static --disable-gtkdoc --libdir=/usr/lib/
+./autogen.sh --disable-static --disable-gtkdoc --libdir=/usr/lib/ --with-system-libav
 make %{?_smp_mflags}
 
 
