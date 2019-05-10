@@ -1,0 +1,36 @@
+From b2806b8a645b98c0b75069a02415043ea1722e56 Tue, 8 Oct 2019 18:21:33 +0200
+From: Andrew Branson <andrew.branson@jollamobile.com>
+Date: Tue, 8 Oct 2019 18:20:32 +0200
+Subject: [PATCH] [aac] Re-enable AAC encoder. JB#42353
+
+diff --git a/ext/libav/gstavaudenc.c b/ext/libav/gstavaudenc.c
+index c4c7aab..66cd134 100644
+--- a/ext/libav/gstavaudenc.c
++++ b/ext/libav/gstavaudenc.c
+@@ -727,7 +727,6 @@
+ 
+   while ((in_plugin = (AVCodec *) av_codec_iterate (&i))) {
+     gchar *type_name;
+-    guint rank;
+ 
+     /* Skip non-AV codecs */
+     if (in_plugin->type != AVMEDIA_TYPE_AUDIO)
+@@ -792,17 +791,7 @@
+       }
+     }
+ 
+-    switch (in_plugin->id) {
+-        /* avenc_aac: see https://bugzilla.gnome.org/show_bug.cgi?id=691617 */
+-      case AV_CODEC_ID_AAC:
+-        rank = GST_RANK_NONE;
+-        break;
+-      default:
+-        rank = GST_RANK_SECONDARY;
+-        break;
+-    }
+-
+-    if (!gst_element_register (plugin, type_name, rank, type)) {
++    if (!gst_element_register (plugin, type_name, GST_RANK_SECONDARY, type)) {
+       g_free (type_name);
+       return FALSE;
+     }

@@ -2,14 +2,15 @@
 %define gstreamer   gstreamer
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.14.1
+Version:        1.16.1
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 Group:          Libraries/Multimedia
 License:        LGPLv2+
 URL:            http://gstreamer.freedesktop.org/
 Source0:        http://gstreamer.freedesktop.org/src/gst-libav/%{name}-%{version}.tar.gz
-Patch0:         0001-Fix-build-by-disabling-gtkdoc-generation-and-git-cal.patch
+Patch1:         0001-Fix-build-by-disabling-gtkdoc-generation-and-git-cal.patch
+Patch2:         0002-aac-Reenable-AAC-encoder.patch
 
 Requires:       gstreamer1.0
 Requires:       gstreamer1.0-plugins-base
@@ -18,14 +19,15 @@ Requires:       gstreamer1.0-plugins-base
 
 BuildRequires:  pkgconfig(gstreamer-1.0) >= %{sonamever}
 BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0) >= %{sonamever}
-BuildRequires:  orc-devel
-BuildRequires:  bzip2-devel
+BuildRequires:  pkgconfig(orc-0.4)
 BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavfilter)
 BuildRequires:  pkgconfig(libavformat)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libswresample)
 BuildRequires:  pkgconfig(libswscale)
+BuildRequires:  pkgconfig(zlib)
+BuildRequires:  bzip2-devel
 %ifarch %{ix86} x86_64
 BuildRequires:  yasm
 %endif
@@ -42,26 +44,15 @@ This plugin contains the libav (formerly FFmpeg) codecs, containing codecs for m
 multimedia formats.
 
 
-%package devel-docs
-Summary: Development documentation for the libav GStreamer plug-in
-Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
-
-%description devel-docs
-GStreamer is a streaming media framework, based on graphs of elements which
-operate on media data.
-
-This package contains the development documentation for the libav GStreamer
-plug-in.
-
-
 %prep
 %setup -q -n %{name}-%{version}/upstream
-%patch0 -p1
+%patch1 -p1
+# Enabling the AAC encoder here would let us drop gst-droid's aac encoder, but we should check 
+# for licensing limitations (multichannel?)
+#%patch2 -p1
 
 %build
-./autogen.sh --disable-static --disable-gtkdoc --libdir=/usr/lib/ --with-system-libav
+./autogen.sh --disable-static --disable-gtk-doc --libdir=/usr/lib/ --with-system-libav
 make %{?_smp_mflags}
 
 
