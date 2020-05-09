@@ -2,14 +2,12 @@
 %define gstreamer   gstreamer
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.16.1
+Version:        1.16.2
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
-Group:          Libraries/Multimedia
 License:        LGPLv2+
 URL:            http://gstreamer.freedesktop.org/
 Source0:        http://gstreamer.freedesktop.org/src/gst-libav/%{name}-%{version}.tar.gz
-Patch1:         0001-Fix-build-by-disabling-gtkdoc-generation-and-git-cal.patch
 Patch2:         0002-aac-Reenable-AAC-encoder.patch
 
 Requires:       gstreamer1.0
@@ -28,6 +26,7 @@ BuildRequires:  pkgconfig(libswresample)
 BuildRequires:  pkgconfig(libswscale)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  bzip2-devel
+BuildRequires:  meson
 %ifarch %{ix86} x86_64
 BuildRequires:  yasm
 %endif
@@ -46,22 +45,20 @@ multimedia formats.
 
 %prep
 %setup -q -n %{name}-%{version}/upstream
-%patch1 -p1
 # Enabling the AAC encoder here would let us drop gst-droid's aac encoder, but we should check 
 # for licensing limitations (multichannel?)
 #%patch2 -p1
 
 %build
-./autogen.sh --disable-static --disable-gtk-doc --libdir=/usr/lib/ --with-system-libav
-make %{?_smp_mflags}
+%meson \
+  -Dpackage-name='SailfishOS GStreamer package plugins (ffmpeg)' \
+  -Dpackage-origin='http://sailfishos.org/'
 
+%meson_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%make_install
+%meson_install
 
 %files
 %doc AUTHORS README COPYING
 %{_libdir}/gstreamer-1.0/libgstlibav.so
-
-
