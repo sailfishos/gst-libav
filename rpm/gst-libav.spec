@@ -2,7 +2,7 @@
 %define gstreamer   gstreamer
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.16.2
+Version:        1.18.1
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 License:        LGPLv2+
@@ -52,7 +52,8 @@ multimedia formats.
 %build
 %meson \
   -Dpackage-name='SailfishOS GStreamer package plugins (ffmpeg)' \
-  -Dpackage-origin='http://sailfishos.org/'
+  -Dpackage-origin='http://sailfishos.org/' \
+  -Ddoc=disabled
 
 %meson_build
 
@@ -60,5 +61,6 @@ multimedia formats.
 %meson_install
 
 %files
-%doc AUTHORS README COPYING
+%license COPYING
+%doc AUTHORS
 %{_libdir}/gstreamer-1.0/libgstlibav.so
