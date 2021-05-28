@@ -7,7 +7,7 @@ diff --git a/ext/libav/gstavaudenc.c b/ext/libav/gstavaudenc.c
 index c4c7aab..66cd134 100644
 --- a/ext/libav/gstavaudenc.c
 +++ b/ext/libav/gstavaudenc.c
-@@ -727,7 +727,6 @@
+@@ -768,7 +768,6 @@
  
    while ((in_plugin = (AVCodec *) av_codec_iterate (&i))) {
      gchar *type_name;
@@ -15,7 +15,7 @@ index c4c7aab..66cd134 100644
  
      /* Skip non-AV codecs */
      if (in_plugin->type != AVMEDIA_TYPE_AUDIO)
-@@ -792,17 +791,7 @@
+@@ -833,17 +832,7 @@
        }
      }
  
