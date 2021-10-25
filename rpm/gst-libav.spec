@@ -2,7 +2,7 @@
 %define gstreamer   gstreamer
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.18.4
+Version:        1.18.5
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 License:        LGPLv2+
@@ -45,7 +45,7 @@ multimedia formats.
 
 %prep
 %setup -q -n %{name}-%{version}/upstream
-# Enabling the AAC encoder here would let us drop gst-droid's aac encoder, but we should check 
+# Enabling the AAC encoder here would let us drop gst-droid's aac encoder, but we should check
 # for licensing limitations (multichannel?)
 #%patch2 -p1
 

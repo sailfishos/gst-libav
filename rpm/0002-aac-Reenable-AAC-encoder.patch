@@ -1,13 +1,17 @@
-From b2806b8a645b98c0b75069a02415043ea1722e56 Tue, 8 Oct 2019 18:21:33 +0200
+From d4d86efaa44b2464a77b45c7e33d4a1418bf47dc Mon Sep 17 00:00:00 2001
 From: Andrew Branson <andrew.branson@jollamobile.com>
 Date: Tue, 8 Oct 2019 18:20:32 +0200
-Subject: [PATCH] [aac] Re-enable AAC encoder. JB#42353
+Subject: [PATCH] Re-enable AAC encoder. JB#42353
+
+---
+ ext/libav/gstavaudenc.c | 13 +------------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
 
 diff --git a/ext/libav/gstavaudenc.c b/ext/libav/gstavaudenc.c
-index c4c7aab..66cd134 100644
+index 3ff6432..4f02e3f 100644
 --- a/ext/libav/gstavaudenc.c
 +++ b/ext/libav/gstavaudenc.c
-@@ -768,7 +768,6 @@
+@@ -768,7 +768,6 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
  
    while ((in_plugin = (AVCodec *) av_codec_iterate (&i))) {
      gchar *type_name;
@@ -15,7 +19,7 @@ index c4c7aab..66cd134 100644
  
      /* Skip non-AV codecs */
      if (in_plugin->type != AVMEDIA_TYPE_AUDIO)
-@@ -833,17 +832,7 @@
+@@ -833,17 +832,7 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
        }
      }
  
@@ -34,3 +38,6 @@ index c4c7aab..66cd134 100644
        g_free (type_name);
        return FALSE;
      }
+-- 
+2.25.1
+
