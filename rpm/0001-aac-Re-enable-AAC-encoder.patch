@@ -1,17 +1,17 @@
-From d4d86efaa44b2464a77b45c7e33d4a1418bf47dc Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andrew Branson <andrew.branson@jollamobile.com>
 Date: Tue, 8 Oct 2019 18:20:32 +0200
-Subject: [PATCH] Re-enable AAC encoder. JB#42353
+Subject: [PATCH] aac: Re-enable AAC encoder
 
 ---
- ext/libav/gstavaudenc.c | 13 +------------
+ subprojects/gst-libav/ext/libav/gstavaudenc.c | 13 +------------
  1 file changed, 1 insertion(+), 12 deletions(-)
 
-diff --git a/ext/libav/gstavaudenc.c b/ext/libav/gstavaudenc.c
-index 3ff6432..4f02e3f 100644
---- a/ext/libav/gstavaudenc.c
-+++ b/ext/libav/gstavaudenc.c
-@@ -768,7 +768,6 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
+diff --git a/subprojects/gst-libav/ext/libav/gstavaudenc.c b/subprojects/gst-libav/ext/libav/gstavaudenc.c
+index 689982f3e8bb0ee113d3badf63b4d0efc213a713..b8fc4d8f253e5d969d57aed11b0e3f520b08faa8 100644
+--- a/subprojects/gst-libav/ext/libav/gstavaudenc.c
++++ b/subprojects/gst-libav/ext/libav/gstavaudenc.c
+@@ -766,7 +766,6 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
  
    while ((in_plugin = (AVCodec *) av_codec_iterate (&i))) {
      gchar *type_name;
@@ -19,7 +19,7 @@ index 3ff6432..4f02e3f 100644
  
      /* Skip non-AV codecs */
      if (in_plugin->type != AVMEDIA_TYPE_AUDIO)
-@@ -833,17 +832,7 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
+@@ -831,17 +830,7 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
        }
      }
  
@@ -38,6 +38,3 @@ index 3ff6432..4f02e3f 100644
        g_free (type_name);
        return FALSE;
      }
--- 
-2.25.1
-
