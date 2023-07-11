@@ -5,12 +5,12 @@
 %global _vpath_builddir subprojects/gst-libav/_build
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.20.4
+Version:        1.22.4
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 License:        LGPLv2+
 URL:            http://gstreamer.freedesktop.org/
-Source0:        http://gstreamer.freedesktop.org/src/gst-libav/%{name}-%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.gz
 Patch2:         0001-aac-Re-enable-AAC-encoder.patch
 
 Requires:       gstreamer1.0
