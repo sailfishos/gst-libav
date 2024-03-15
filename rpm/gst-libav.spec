@@ -5,7 +5,7 @@
 %global _vpath_builddir subprojects/gst-libav/_build
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.22.4
+Version:        1.22.10
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 License:        LGPLv2+
