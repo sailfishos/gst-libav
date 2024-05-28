@@ -5,13 +5,13 @@
 %global _vpath_builddir subprojects/gst-libav/_build
 
 Name:           %{gstreamer}%{majorminor}-libav
-Version:        1.22.10
+Version:        1.24.3
 Release:        1%{?dist}
 Summary:        GStreamer Streaming-media framework plug-in using libav (FFmpeg).
 License:        LGPLv2+
 URL:            http://gstreamer.freedesktop.org/
 Source0:        %{name}-%{version}.tar.gz
-Patch2:         0001-aac-Re-enable-AAC-encoder.patch
+Patch1:         0001-aac-Re-enable-AAC-encoder.patch
 
 Requires:       gstreamer1.0
 Requires:       gstreamer1.0-plugins-base
@@ -47,10 +47,10 @@ multimedia formats.
 
 
 %prep
-%autosetup -p1 -n %{name}-%{version}/gstreamer
+%setup -q -n %{name}-%{version}/gstreamer
 # Enabling the AAC encoder here would let us drop gst-droid's aac encoder, but we should check
 # for licensing limitations (multichannel?)
-#%patch2 -p1
+#%patch1 -p1
 
 %build
 %meson \
