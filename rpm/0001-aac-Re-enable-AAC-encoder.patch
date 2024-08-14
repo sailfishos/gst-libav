@@ -8,10 +8,10 @@ Subject: [PATCH] aac: Re-enable AAC encoder
  1 file changed, 1 insertion(+), 12 deletions(-)
 
 diff --git a/subprojects/gst-libav/ext/libav/gstavaudenc.c b/subprojects/gst-libav/ext/libav/gstavaudenc.c
-index 57f41fe617d0ad4d530604037c577aeff8d81885..5d8035830e2585b081919ffcd2ac3313d90653f0 100644
+index 6ff966d32ceee7cd08d4f27ec1a92422ffdde58c..e8be735d6f52e7f0be7910f5a94f698abe107276 100644
 --- a/subprojects/gst-libav/ext/libav/gstavaudenc.c
 +++ b/subprojects/gst-libav/ext/libav/gstavaudenc.c
-@@ -805,7 +805,6 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
+@@ -784,7 +784,6 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
  
    while ((in_plugin = (AVCodec *) av_codec_iterate (&i))) {
      gchar *type_name;
@@ -19,7 +19,7 @@ index 57f41fe617d0ad4d530604037c577aeff8d81885..5d8035830e2585b081919ffcd2ac3313
  
      /* Skip non-AV codecs */
      if (in_plugin->type != AVMEDIA_TYPE_AUDIO)
-@@ -870,17 +869,7 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
+@@ -849,17 +848,7 @@ gst_ffmpegaudenc_register (GstPlugin * plugin)
        }
      }
  
